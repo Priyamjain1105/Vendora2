@@ -1,0 +1,8 @@
+flask-sqlalchemy
+flask-migrate
+pymysql
+python-dotenv
+flask-pymongo
+jsonify
+flask-login
+flask-bcrypt
