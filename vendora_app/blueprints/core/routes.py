@@ -8,7 +8,7 @@ core = Blueprint('core', __name__, template_folder = 'templates')
 @core.route('/')
 def index():
     #return render_template('vendor/index.html')
-    return redirect(url_for('vendor.index'))
+    return redirect(url_for('customer.vendors'))
 
 @core.route('/about')
 def about():

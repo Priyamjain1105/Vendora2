@@ -1,4 +1,4 @@
-from flask import request, render_template, redirect, url_for, Blueprint
+from flask import request, render_template, redirect, url_for, Blueprint, session
 from vendora_app.app import db, bcrypt
 
 from flask_login import login_user, logout_user, current_user, login_required
@@ -53,7 +53,7 @@ def signup():
         db.session.add(user)
         db.session.commit()
         
-        return redirect(url_for('auth.index'))
+        return redirect(url_for('vendor.login'))
 
 @auth.route('/login',methods = ['GET','POST'])
 def login():
@@ -68,14 +68,15 @@ def login():
         
         if bcrypt.check_password_hash(user.password,password):
             login_user(user)
-            return redirect(url_for('auth.index'))
+            return redirect(url_for('customer.vendors'))
         else:
             return 'Failed'
 
 @auth.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('auth.index'))
+    session.clear()
+    return redirect(url_for('customer.vendors'))
 
 @auth.route('/new_note',methods = ['GET','POST'])
 @login_required

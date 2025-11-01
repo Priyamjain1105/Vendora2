@@ -8,3 +8,6 @@ customer = Blueprint('customer', __name__, template_folder = 'templates')
 def index():
     return render_template('customer/index.html')
 
+@customer.route('/vendors')
+def vendors():
+    return render_template('customer/vendors.html')
