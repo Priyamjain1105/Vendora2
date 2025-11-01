@@ -53,7 +53,16 @@ def signup():
         db.session.add(user)
         db.session.commit()
         
-        return redirect(url_for('vendor.login'))
+        user = User.query.filter(User.username == username).first()
+        
+        if bcrypt.check_password_hash(user.password,password):
+            login_user(user)
+            return redirect(url_for('customer.vendors'))
+        else:
+            return 'Failed'
+        
+        
+        #return redirect(url_for('auth.login'))
 
 @auth.route('/login',methods = ['GET','POST'])
 def login():
