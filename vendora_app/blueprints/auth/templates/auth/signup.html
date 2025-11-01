@@ -1,66 +1,87 @@
-{% extends "base.html"%}
-{% block title %}Index{% endblock %}
-
-
-{% block header_content %}
+{% extends "base.html"%} {% block title %}Index{% endblock %} {% block
+header_content %}
 <header class="bg-white shadow-sm sticky top-0 z-50">
-    <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        <a href="{{ url_for('core.index') }}" class="text-2xl font-bold text-gray-900">
-            Vendora
-        </a>
-        <div class="flex items-center space-x-4 sm:space-x-6">
-            <a href="#" class="text-gray-600 hover:text-blue-600 transition duration-300 ease-in-out font-medium">
-                Look for Vendor
-            </a>
-            <a href="{{ url_for('core.index')}}"
-                class="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 transition duration-300 ease-in-out">
-                Back
-            </a>
-        </div>
-    </nav>
-</header>
-{% endblock %}
-
-{% block content %}
-<div class="flex flex-col items-center justify-center py-12 px-4 sm:px-6">
-
-    <!-- Card/Surface for the Form (White background, rounded corners, shadow) -->
-    <div class="w-full max-w-md bg-surface p-8 sm:p-10 rounded-xl shadow-lg border border-gray-200">
-
-        <!-- Page Title -->
-        <!-- Note: Changed to match "Sign Up" for consistency with the form context -->
-        <h1 class="text-3xl font-extrabold text-gray-900 text-center mb-8">
-            Sign Up Page
-        </h1>
-
-        <!-- The Form Structure with Tailwind Styling -->
-        <form action="{{url_for('auth.signup')}}" method="POST" class="space-y-6">
-
-            <!-- Username Input -->
-            <div>
-                <label for="username" class="sr-only">Username</label>
-                <input type="text" name="username" placeholder="Username" required="required"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition duration-150 shadow-sm">
-            </div>
-
-            <!-- Password Input -->
-            <div>
-                <label for="password" class="sr-only">Password</label>
-                <input type="password" name="password" placeholder="Password" required="required"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition duration-150 shadow-sm">
-            </div>
-
-            <!-- Submit Button (Primary color, rounded, shadow) -->
-            <input type="submit" value="Sign Up"
-                class="w-full py-3 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50">
-        </form>
-
-        <!-- Optional: Link for existing users -->
-        <p class="mt-6 text-center text-sm text-gray-500">
-            Already have an account? <a href="{{ url_for('auth.login') }}"
-                class="text-primary hover:text-blue-800 font-medium transition duration-150">Log in here</a>
-        </p>
+  <nav
+    class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+  >
+    <a
+      href="{{ url_for('core.index') }}"
+      class="text-2xl font-bold text-gray-900"
+    >
+      Vendora
+    </a>
+    <div class="flex items-center space-x-4 sm:space-x-6">
+      <a
+        href="{{ url_for('vendor.index') }}"
+        class="text-gray-600 hover:text-blue-600 transition duration-300 ease-in-out font-medium"
+      >
+        Look for Vendor
+      </a>
+      <a
+        href="{{ url_for('core.index')}}"
+        class="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 transition duration-300 ease-in-out"
+      >
+        Back
+      </a>
     </div>
+  </nav>
+</header>
+{% endblock %} {% block content %}
+<div class="flex flex-col items-center justify-center py-12 px-4 sm:px-6">
+  <!-- Card/Surface for the Form (White background, rounded corners, shadow) -->
+  <div
+    class="w-full max-w-md bg-surface p-8 sm:p-10 rounded-xl shadow-lg border border-gray-200"
+  >
+    <!-- Page Title -->
+    <!-- Note: Changed to match "Sign Up" for consistency with the form context -->
+    <h1 class="text-3xl font-extrabold text-gray-900 text-center mb-8">
+      Sign Up Page
+    </h1>
+
+    <!-- The Form Structure with Tailwind Styling -->
+    <form action="{{url_for('auth.signup')}}" method="POST" class="space-y-6">
+      <!-- Username Input -->
+      <div>
+        <label for="username" class="sr-only">Username</label>
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          required="required"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition duration-150 shadow-sm"
+        />
+      </div>
+
+      <!-- Password Input -->
+      <div>
+        <label for="password" class="sr-only">Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required="required"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition duration-150 shadow-sm"
+        />
+      </div>
+
+      <!-- Submit Button (Primary color, rounded, shadow) -->
+      <input
+        type="submit"
+        value="Sign Up"
+        class="w-full py-3 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+      />
+    </form>
+
+    <!-- Optional: Link for existing users -->
+    <p class="mt-6 text-center text-sm text-gray-500">
+      Already have an account?
+      <a
+        href="{{ url_for('auth.login') }}"
+        class="text-primary hover:text-blue-800 font-medium transition duration-150"
+        >Log in here</a
+      >
+    </p>
+  </div>
 </div>
 
 {% endblock%}
