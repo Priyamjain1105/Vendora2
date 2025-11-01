@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-
 {% block header_content %}
 <header class="bg-white shadow-sm sticky top-0 z-50">
     <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
@@ -12,13 +11,16 @@
                 class="text-gray-600 hover:text-blue-600 transition duration-300 ease-in-out font-medium">
                 Look for Vendor
             </a>
-            <a href="{{ url_for('core.index')}}"
+            <!-- Dynamic Back Button -->
+            <button onclick="history.back()"
                 class="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 transition duration-300 ease-in-out">
                 Back
-            </a>
+            </button>
         </div>
     </nav>
 </header>
+
+
 {% endblock %} {% block content %}
 
 {% endblock %}

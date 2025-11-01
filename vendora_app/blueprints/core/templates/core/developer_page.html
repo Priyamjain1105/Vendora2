@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Developer Page{% endblock %}
+
+{% block content %}
+<div class="bg-gray-100 min-h-screen py-10">
+    <div class="container mx-auto max-w-5xl px-4">
+        <h1 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Developer Page</h1>
+        <p class="text-center text-gray-600 mb-10">
+            A quick view of all internal routes and pages under development.
+        </p>
+
+        <!-- Routes Table -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+            <table class="min-w-full border-collapse">
+                <thead class="bg-blue-700 text-white">
+                    <tr>
+                        <th class="py-3 px-4 text-left text-sm font-semibold uppercase tracking-wider">Page</th>
+                        <th class="py-3 px-4 text-left text-sm font-semibold uppercase tracking-wider">Route</th>
+                        <th class="py-3 px-4 text-left text-sm font-semibold uppercase tracking-wider">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 text-gray-700">
+                    {% for route in routes %}
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="py-3 px-4 font-medium">{{ route.name }}</td>
+                        <td class="py-3 px-4">
+                            {% if route.url %}
+                            <a href="{{ route.url }}" class="text-blue-700 hover:underline">{{ route.path }}</a>
+                            {% else %}
+                            <span class="text-gray-500">{{ route.path }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="py-3 px-4">
+                            {% if route.status == "Completed" %}
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">{{
+                                route.status }}</span>
+                            {% elif route.status == "In Progress" %}
+                            <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">{{
+                                route.status }}</span>
+                            {% else %}
+                            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-medium">{{
+                                route.status }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Info Box -->
+        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-2xl p-5 shadow-sm">
+            <h2 class="text-lg font-semibold text-blue-800 mb-3">Developer Notes</h2>
+
+            <p class="text-blue-700 text-sm leading-relaxed mb-3">
+                This page is designed to streamline development and testing across Vendora’s modules.
+                Each entry reflects the current build status of a route or feature.
+            </p>
+
+            <ul class="list-disc list-inside text-blue-700 text-sm space-y-1 mb-3">
+                <li><strong class="text-gray-800">Completed:</strong> Ready for deployment</li>
+                <li><strong class="text-gray-800">In Progress:</strong> Under active development or review</li>
+                <li><strong class="text-gray-800">Not Started:</strong> Planned for future implementation</li>
+            </ul>
+
+            <p class="text-blue-700 text-sm">
+                Developers should keep this page up-to-date as features progress through stages.
+            </p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,9 +1,143 @@
-{% extends "base.html" %} {% block title %}Page Title{% endblock %} {% block
-head_content %}
-<!-- Page-specific head content -->
-{% endblock %} {% block content %}
-<!-- Your page content here -->
-<h1>Vendor Page</h1>
-{% endblock %} {% block scripts %}
-<!-- Page-specific JavaScript here -->
+{% extends "base.html" %}
+
+{% block title %}Vendors | Vendora{% endblock %}
+
+<!-- Header Section -->
+{% block header_content %}
+<!-- Enhanced shadow and separation -->
+<header class="bg-white shadow-xl sticky top-0 z-50 border-b border-gray-200">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <!-- Logo with bolder font and primary color -->
+        <a href="{{ url_for('core.index') }}" class="text-3xl font-extrabold text-primary">
+            Vendora
+        </a>
+        <div class="flex items-center space-x-4 sm:space-x-6">
+
+
+            <!-- Button with rounded-full shape, shadow, and scale hover effect -->
+            <a href="{{ url_for('auth.index')}}"
+                class="bg-primary text-white font-semibold py-2 px-5 rounded-full shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105">
+                Login / Sign Up
+            </a>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="bg-gray-100 min-h-screen py-10">
+    <div class="container mx-auto max-w-6xl px-4">
+        <h1 class="text-3xl font-semibold text-gray-800 mb-8 text-center">
+            Explore Verified Vendors
+        </h1>
+
+        <!-- Search Bar -->
+        <div class="mb-8 max-w-md mx-auto">
+            <input type="text" placeholder="Search for services or vendors..."
+                class="w-full p-3 rounded-xl shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-700 focus:outline-none" />
+        </div>
+
+        <!-- Vendor Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% set vendors = [
+            {
+            "name": "Sharma Electricals",
+            "category": "Electrical Repairs",
+            "rating": 4.7,
+            "reviews": 128,
+            "desc": "Expert in home wiring, fan & switch repairs.",
+            "location": "Jhansi, Uttar Pradesh",
+            "image": "https://images.unsplash.com/photo-1581091870627-3f9c88ebf4c4?auto=format&fit=crop&w=600&q=60"
+            },
+            {
+            "name": "GreenScape Gardeners",
+            "category": "Gardening Services",
+            "rating": 4.5,
+            "reviews": 96,
+            "desc": "Lawn maintenance, landscaping, and plant care.",
+            "location": "Bhopal, Madhya Pradesh",
+            "image": "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=600&q=60"
+            },
+            {
+            "name": "CoolAir Solutions",
+            "category": "AC Repair & Maintenance",
+            "rating": 4.9,
+            "reviews": 210,
+            "desc": "Professional AC installation and servicing.",
+            "location": "Indore, Madhya Pradesh",
+            "image": "https://images.unsplash.com/photo-1581579185169-8b67c403108b?auto=format&fit=crop&w=600&q=60"
+            },
+            {
+            "name": "Sparkle Laundry",
+            "category": "Laundry & Dry Cleaning",
+            "rating": 4.3,
+            "reviews": 75,
+            "desc": "Quick and affordable laundry service near you.",
+            "location": "Gwalior, Madhya Pradesh",
+            "image": "https://images.unsplash.com/photo-1590080875831-6e8b1b6d2d19?auto=format&fit=crop&w=600&q=60"
+            },
+            {
+            "name": "BrightView Studios",
+            "category": "Photography & Videography",
+            "rating": 4.8,
+            "reviews": 189,
+            "desc": "Capturing your best moments with creativity.",
+            "location": "Lucknow, Uttar Pradesh",
+            "image": "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=60"
+            },
+            {
+            "name": "HealthyBite Caterers",
+            "category": "Catering Services",
+            "rating": 4.6,
+            "reviews": 154,
+            "desc": "Delicious catering for parties, weddings, and events.",
+            "location": "Kanpur, Uttar Pradesh",
+            "image": "https://images.unsplash.com/photo-1543353071-087092ec393a?auto=format&fit=crop&w=600&q=60"
+            }
+            ] %}
+
+            {% for v in vendors %}
+            <div class="bg-white rounded-2xl shadow hover:shadow-lg transition duration-300 overflow-hidden">
+                <img src="{{ v.image }}" alt="{{ v.name }}" class="h-40 w-full object-cover" />
+                <div class="p-5">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-1">{{ v.name }}</h2>
+                    <p class="text-sm text-blue-700 font-medium mb-2">{{ v.category }}</p>
+                    <p class="text-gray-600 text-sm mb-3">{{ v.desc }}</p>
+
+                    <!-- Rating -->
+                    <div class="flex items-center text-yellow-500 mb-3">
+                        {% for i in range(5) %}
+                        {% if i < v.rating|round(0, 'floor' ) %} <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 fill-current" viewBox="0 0 20 20">
+                            <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.905c.969 0 1.372 1.24.588 1.81l-3.975 2.89a1 1 0 00-.364 1.118l1.518 4.674c.3.922-.755 1.688-1.54 1.118l-3.974-2.89a1 1 0 00-1.176 0l-3.974 2.89c-.785.57-1.84-.196-1.54-1.118l1.518-4.674a1 1 0 00-.364-1.118l-3.975-2.89c-.784-.57-.38-1.81.589-1.81h4.905a1 1 0 00.95-.69l1.519-4.674z" />
+                            </svg>
+                            {% endif %}
+                            {% endfor %}
+                            <span class="text-gray-700 text-sm ml-2">{{ v.rating }} ({{ v.reviews }} reviews)</span>
+                    </div>
+
+                    <p class="text-gray-500 text-sm mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline text-blue-700 mr-1" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 2C8.13 2 5 5.13 5 9c0 7.25 7 13 7 13s7-5.75 7-13c0-3.87-3.13-7-7-7z" />
+                            <circle cx="12" cy="9" r="2.5" fill="currentColor" />
+                        </svg>
+                        {{ v.location }}
+                    </p>
+
+                    <button class="bg-blue-700 text-white px-4 py-2 rounded-xl w-full hover:bg-blue-800 transition">
+                        View Details
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Page-specific JavaScript -->
 {% endblock %}
